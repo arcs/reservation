@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
+const {Reservation} = require('./index.js');
 mongoose.Promise = global.Promise;
-// const Reservation = require('./index.js');
-const { Reservation } = require('./index.js');
 
 const genPropId = () => Math.floor(Math.random() * 101);
 const genPrice = () => Math.floor(Math.random() * 2001);
@@ -9,7 +8,7 @@ const genRevCount = () => Math.floor(Math.random() * 61);
 const genAvailDate = () => Math.floor(Math.random() * 32);
 const genReservDate = () => Math.floor(Math.random() * 32);
 
-const seedDb = Array.from({ length: 100 }, () => {
+const seedDb = Array.from({length: 100}, () => {
   return {
     propertyId: genPropId(), //researching a way to have sequential IDs
     costPerNight: genPrice(),
