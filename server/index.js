@@ -1,13 +1,19 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const Reservation = require('../db/index.js');
+const {Reservation} = require('../db/index.js');
 const app = express();
 const port = 3001;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(__dirname + '/../client/dist'));
+app.use(express.static(path.resolve(__dirname + '/../client/dist')));
+
+app.get('/reservation', (req, res) => {
+  Reservation.find({}, (err, data) => {
+    err ? console.error(err) : res.status(200).send(data);
+  })
+});
 
 app.get('/:propertyid', (req, res) => {
   res.sendFile(path.join(__dirname + '/../client/dist/index.html'));
