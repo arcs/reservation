@@ -1,21 +1,26 @@
 const mongoose = require('mongoose');
-const {Reservation} = require('./index.js');
+const {Reservation, db} = require('./index.js');
 mongoose.Promise = global.Promise;
 
-const genPropId = () => Math.floor(Math.random() * 101);
+let count = 1;
+let rating = ['Exceptional 5/5', 'Awesome 4/5', 'Great 3/5'];
+
 const genPrice = () => Math.floor(Math.random() * 2001);
 const genRevCount = () => Math.floor(Math.random() * 61);
-const genAvailDate = () => Math.floor(Math.random() * 32);
-const genReservDate = () => Math.floor(Math.random() * 32);
+const range = (start, end) => {
+  return Array.from({length: (end - start)}, (a, b) => b + start)
+};
 
 const seedDb = Array.from({length: 100}, () => {
+  let startDate = Math.ceil(Math.random() * 20);
+  let endDate = startDate + Math.ceil(Math.random() * 10);
   return {
-    propertyId: genPropId(), //researching a way to have sequential IDs
-    costPerNight: genPrice(),
-    reviewCount: genRevCount(),
-    availableDate: genAvailDate(), //would love to have non-conflicting behavior with reserved dates
-    reservedDate: genReservDate()
+    propertyid: count++,
+    costpernight: genPrice(),
+    reviewcount: genRevCount(),
+    reserveddate: range(startDate, endDate),
+    starrating: rating[Math.floor(Math.random() * 3)]
   }
 });
 
-Reservation.create(seedDb); //need to create a way to terminate seeding script so it's doesn't continue to run.
+Reservation.create(seedDb).then(() => db.close());
