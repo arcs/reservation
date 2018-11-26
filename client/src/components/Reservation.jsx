@@ -2,11 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import $ from 'jquery';
 
-const Lightning = styled.div`
-  background-image: url('./instant-book2.png');
-  width: 27px;
-  height: 27px;
-  margin-top: 20px;
+const MainContainer = styled.div`
+  height: 1080px;
+  width: 400px;
+  float: right;
+  padding: 25px;
+  border: 1px solid #d3d8de;
+  font-family: Lato,Arial,Helvetica Neue,sans-serif;
 `;
 
 const TopContainer = styled.section`
@@ -23,10 +25,17 @@ const RowContainer = styled.section`
   height: 40px;
 `;
 
+const Lightning = styled.div`
+  background-image: url('./instant-book.png');
+  filter: brightness(0%);
+  width: 27px;
+  height: 27px;
+  margin-top: 20px;
+`;
+
 const Price = styled.h1`
   color: #323f4d;
   font-size: 32px;
-  font-weight: bold;
   height: 32px;
   line-height: 0px;
   margin-right: 4px;
@@ -37,6 +46,43 @@ const Average = styled.p`
   font-size: 14px;
   height: 20px;
   line-height: 46px;
+`;
+
+const Widget = styled.div`
+  display: flex;
+  flex-direction: row;
+  height: 40px;
+  box-sizing: border-box;
+`;
+
+const Share = styled.button`
+  background-image: url('./share.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: white;
+  width: 40px;
+  height: 40px;
+  margin-left: 100px;
+  margin-right: 8px;
+  border: none;
+  touch-action: manipulation;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0,0,0,.16);
+  border-radius: 50%; 
+`;
+
+const Favorite = styled.button`
+  background-image: url('./favorite.png');
+  background-repeat: no-repeat;
+  background-position: center; 
+  background-color: white;
+  width: 40px;
+  height: 40px;
+  border: none;
+  touch-action: manipulation;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0,0,0,.16);
+  border-radius: 50%; 
 `;
 
 const Reviews = styled.p`
@@ -51,61 +97,72 @@ const Stars = styled.p`
   margin-top: -10px;
 `;
 
-const Book = styled.button`
-  min-height: 48px;
-  position: relative;
-  border-radius: 100px;
-  background-color: #0067db;
-  border-color: #0067db;
-  color: #fff;
-  text-shadow: none;
-  transition: all .25s ease-in-out;
-  line-height: 24px;
-  box-shadow: none;
-  margin-bottom: 0;
-  font-weight: 400;
-  text-align: center;
-  vertical-align: middle;
+const DatesContainer = styled.div`
+  margin-bottom: 8px;
+  background-color: #fff;
+  border: 1px solid #d3d8de;
+  border-radius: 4px;
+`;
+
+const CheckIn = styled.div`
+  background-color: #fff;
+  width: 170px;
+  border-right: 1px solid #d3d8de;
+  border-bottom: 1px solid #d3d8de;
+  float: left;
+  background-image: url('./calendar.png');
+  background-repeat: no-repeat;
+  background-position: 170px; 
+  background-color: white; 
   touch-action: manipulation;
   cursor: pointer;
-  background-image: none;
+  padding: 16px;
+`;
+
+const CheckOut = styled.div`
+  background-color: #fff;
+  width: auto;
+  border-bottom: 1px solid #d3d8de;
+  background-image: url('./calendar.png');
+  background-repeat: no-repeat;
+  background-position: 370px; 
+  background-color: white;
+  touch-action: manipulation;
+  cursor: pointer;
+  padding: 16px;
+`;
+
+const Guests = styled.div`
+  float: bottom;
+`;
+
+const Book = styled.button`
+  min-height: 48px;
+  border-radius: 100px;
+  background-color: #0067db;
+  color: #fff;
+  text-align: center;
+  touch-action: manipulation;
+  cursor: pointer;
   border: 1px solid transparent;
-  white-space: nowrap;
   padding: 11px 32px;
   font-size: 1rem;
-  user-select: none;
   display: block;
-  width: 10%;
+  width: 365px;
 `;
 
 const Question = styled.a`
-  box-sizing: border-box;
   display: block;
-  font-size: 16px;
-  white-space: normal;
-  min-height: 48px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 0;
   color: #0067db;
-  font-weight: 400;
-  border-color: transparent;
-  background: none;
-  background-color: transparent;
-  position: relative;
-  vertical-align: middle;
+  text-align: center;
   touch-action: manipulation;
   cursor: pointer;
-  border: 1px solid transparent;
   border-radius: 100px;
-  padding: 11px 96px;
-  line-height: 24px;
+  padding: 20px
 `;
 
 const Assistance = styled.p`
-  padding-top: 8px;
-  flex-direction: column;
-  margin-bottom: 16px;
+  text-align: center;
 `;
 
 export default class Reservation extends React.Component {
@@ -136,56 +193,46 @@ export default class Reservation extends React.Component {
       <div>
         {this.state.init &&
           <div id="sidebar-container">
-            <div id="inner-container">
-              <TopContainer>
-              <div>
-                <RowContainer>
-                  <Lightning></Lightning>
-                  <Price>${this.state.data.costpernight}</Price>
-                  <Average> avg/night</Average>
-                <div id="side-bar-icons">
-                  <span id="sidebar-pic1"></span>
-                  <span id="sidebar-pic2"></span>
+            <MainContainer>
+              <div id="inner-container">
+                <TopContainer>
+                <div>
+                  <RowContainer>
+                    <Lightning></Lightning>
+                    <Price>${this.state.data.costpernight}</Price>
+                    <Average> avg/night</Average>
+                    <div>
+                      <Widget>
+                        <Share></Share>
+                        <Favorite></Favorite>
+                      </Widget>
+                    </div>
+                  </RowContainer>
                 </div>
-                </RowContainer>
-              </div>
-              <div id="stars-box">
-                <span id="stars"></span>
-                <Reviews>{this.state.data.reviewcount} Reviews</Reviews>
-                <Stars>{this.state.data.starrating}</Stars>
-              </div>
-            </TopContainer>
-              <div id="availabliities">
-                <span id="check-mark"></span>
-                <div> Your dates are <b>Available!</b></div>
-                <span>Check In</span>
-                <span> Check Out
-                  <span id="check-out-date">
-                    {' Nov ' + this.state.data.reserveddate}
-                  </span>
-                </span>
-                <div id="guests">Guests<br/>
-                  <span id="guest-count"> # of guests</span>
+                <div id="stars-box">
+                  <span id="stars"></span>
+                  <Reviews>{this.state.data.reviewcount} Reviews</Reviews>
+                  <Stars>{this.state.data.starrating}</Stars>
                 </div>
+              </TopContainer>
+                <DatesContainer>
+                  <div id="availablities">
+                    <CheckIn>Check In</CheckIn>
+                    <CheckOut>Check Out</CheckOut>
+                    <Guests>Guests</Guests>
+                  </div>
+                </DatesContainer>
+                <Book>Book Now</Book>
+                <div>
+                  <Question>Ask Owner a Question</Question>
+                </div>
+                <Assistance>
+                  <span>For Booking assistance, call <b>888-829-7076</b><br/>
+                  <b>Property #</b> {this.state.data.propertyid}</span>
+                </Assistance>
+                <div id="feedback">Feedback</div>
               </div>
-              <div id="book-now-box">
-                <span>Total</span>
-                <span id="booking-cost">
-                  {/*{$('#price').val() * ((Number($('#check-out-date').text().slice(-2))) - (Number($('#check-in-date').text().slice(-2)))) + ($('#price').val() * ((Number($('#check-out-date').text().slice(-2))) - (Number($('#check-in-date').text().slice(-2)))) * .15) + 30}*/}
-                </span>
-                <span> Includes taxes and fees</span><br/>
-                <span id="view-details"> View details</span>
-              </div>
-              <Book>Book Now</Book>
-              <div>
-                <Question>Ask Owner a Question</Question>
-              </div>
-              <Assistance>
-              <span>For Booking assistance, call <b>888-829-7076</b><br/>
-              <b>Property #</b> {this.state.data.propertyid}</span>
-              </Assistance>
-              <div id="feedback">Feedback</div>
-            </div>
+            </MainContainer>
           </div>}
       </div>
     )
