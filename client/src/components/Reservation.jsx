@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import ReactStars from 'react-stars'
 import $ from 'jquery';
 
 const MainContainer = styled.div`
@@ -7,8 +8,14 @@ const MainContainer = styled.div`
   float: right;
   font-family: Lato, Arial, Helvetica Neue, sans-serif;
   height: 1080px;
-  padding: 150px 160px 0px 20px;
+  padding: 0px 160px 0px 20px;
   width: 400px;
+`;
+
+const SubContainer = styled.div`
+  border-right: 1px solid #d3d8de;
+  height: 1080px;
+  width: 430px;
 `;
 
 const TopContainer = styled.section`
@@ -23,6 +30,7 @@ const RowContainer = styled.section`
   display: flex;
   flex-direction: row;
   height: 40px;
+  margin-top: 20px;
 `;
 
 const Lightning = styled.div`
@@ -65,8 +73,7 @@ const Share = styled.button`
   box-shadow: 0 1px 2px rgba(0,0,0,.16);
   cursor: pointer;
   height: 40px;
-  margin-left: 100px;
-  margin-right: 8px;
+  margin: 0px 8px 0px 100px;
   touch-action: manipulation;
   width: 40px;
 `;
@@ -84,48 +91,56 @@ const Favorite = styled.button`
   width: 40px;
 `;
 
-const Reviews = styled.p`
+const Reviews = styled.span`
   color: #323f4d;
-  font-size: 14px;
+  font-size: 16px;
+  padding: 5px 0px 0px 5px; 
+`;
+
+const ReviewContainer = styled.div`
+  display: inline-flex;
+  padding-top: 16px;
 `;
 
 const Stars = styled.p`
   color: #5e6d77;
   font-size: 14px;
   font-style: italic;
-  margin-top: -10px;
+  margin-top: -8px;
 `;
 
 const DatesContainer = styled.div`
   background-color: #fff;
   border: 1px solid #d3d8de;
   border-radius: 4px;
-  margin-bottom: 8px;
+  height: 100px;
+  margin: 120px 18px 8px auto;
 `;
 
 const CheckIn = styled.div`
   background-color: #fff; 
   background-image: url('./calendar.png');
-  background-position: 170px; 
+  background-position: 165px; 
   background-repeat: no-repeat;
   border-right: 1px solid #d3d8de;
   border-bottom: 1px solid #d3d8de;
   color: #0067db;
   cursor: pointer;
   float: left;
+  height: auto;
   padding: 16px;
-  touch-action: manipulation;
-  width: 170px;
+  width: 160px;
 `;
 
 const CheckOut = styled.div`
   background-color: #fff;
   background-image: url('./calendar.png');
-  background-position: 370px; 
+  background-position: 380px; 
   background-repeat: no-repeat;
   border-bottom: 1px solid #d3d8de;
   color: #0067db;
   cursor: pointer;
+  height: auto;
   padding: 16px;
   width: auto;
 `;
@@ -141,6 +156,7 @@ const Guests = styled.div`
   border-bottom: 1px solid #d3d8de;
   color: #0067db;
   cursor: pointer;
+  height: auto;
   padding: 16px;
   width: auto;
 `;
@@ -180,10 +196,8 @@ const Feedback = styled.button`
   border-color: #d3d8de;
   border-radius: 4px 4px 0 0;
   color: #0067db;
-  margin-left: 400px;
-  margin-top: 620px;
+  margin: 475px 0px 0px 400px;
   min-height: 48px;
-  text-shadow: no
 `;
 
 export default class Reservation extends React.Component {
@@ -215,47 +229,59 @@ export default class Reservation extends React.Component {
         {this.state.init &&
           <div>
             <MainContainer>
-              <div>
-                <TopContainer>
+              <SubContainer>
                 <div>
-                  <RowContainer>
-                    <Lightning></Lightning>
-                    <Price>${this.state.data.costpernight}</Price>
-                    <Average> avg/night</Average>
-                    <div>
-                      <Widget>
-                        <Share></Share>
-                        <Favorite></Favorite>
-                      </Widget>
-                    </div>
-                  </RowContainer>
-                </div>
-                <div>
-                  <Reviews>{this.state.data.reviewcount} Reviews</Reviews>
-                  <Stars>{this.state.data.starrating}</Stars>
-                </div>
-              </TopContainer>
-                <DatesContainer>
+                  <TopContainer>
                   <div>
-                    <CheckIn>Check In</CheckIn>
-                    <CheckOut><CheckOutPad>Check Out</CheckOutPad></CheckOut>
-                    <Guests>Guests</Guests>
+                    <RowContainer>
+                      <Lightning></Lightning>
+                      <Price>${this.state.data.costpernight}</Price>
+                      <Average> avg/night</Average>
+                      <div>
+                        <Widget>
+                          <Share></Share>
+                          <Favorite></Favorite>
+                        </Widget>
+                      </div>
+                    </RowContainer>
                   </div>
-                </DatesContainer>
-                <BookingContainer>
-                  <Book>Book Now</Book>
-                </BookingContainer>
-                <div>
-                  <Question>Ask Owner a Question</Question>
+                  <div>
+                    <ReviewContainer>
+                      <ReactStars
+                        count={5}
+                        color1={'#C6CCD1'}
+                        color2={'#2C2F34'}
+                        edit={false}
+                        size={24}
+                        value={Number(this.state.data.starrating.slice(-3, -2))}
+                      />
+                      <Reviews>{this.state.data.reviewcount} Reviews</Reviews>
+                    </ReviewContainer>
+                    <Stars>{this.state.data.starrating}</Stars>
+                  </div>
+                </TopContainer>
+                  <DatesContainer>
+                    <div>
+                      <CheckIn>Check In</CheckIn>
+                      <CheckOut><CheckOutPad>Check Out</CheckOutPad></CheckOut>
+                      <Guests>Guests</Guests>
+                    </div>
+                  </DatesContainer>
+                  <BookingContainer>
+                    <Book>Book Now</Book>
+                  </BookingContainer>
+                  <div>
+                    <Question>Ask Owner a Question</Question>
+                  </div>
+                  <Assistance>
+                    <span>For Booking assistance, call <b>888-829-7076</b><br/>
+                    <b>Property #</b> {this.state.data.propertyid}</span>
+                  </Assistance>
+                  <div>
+                    <Feedback>Feedback</Feedback>
+                  </div>
                 </div>
-                <Assistance>
-                  <span>For Booking assistance, call <b>888-829-7076</b><br/>
-                  <b>Property #</b> {this.state.data.propertyid}</span>
-                </Assistance>
-                <div>
-                  <Feedback>Feedback</Feedback>
-                </div>
-              </div>
+              </SubContainer>
             </MainContainer>
           </div>}
       </div>
