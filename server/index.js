@@ -1,16 +1,28 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const Reservations = require('../db/index.js');
-let app = express();
+const path = require('path');
+const {Reservation} = require('../db/index.js');
+const app = express();
+const port = 3001;
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(__dirname + '/../client.dist'));
+app.use(express.static(path.resolve(__dirname + '/../client/dist')));
 
-Reservations.Reservations.create({
-  _id: 1,
-  reservation: 'YE BOI!'
-}, () => {});
+app.get('/reservation', (req, res) => {
+  Reservation.find({}, (err, data) => {
+    err ? console.error(err) : res.status(200).send(data);
+  })
+});
 
-let port = 3000;
+app.get('/:propertyid', (req, res) => {
+  res.sendFile(path.join(__dirname + '/../client/dist/index.html'));
+});
+
+app.get('/reservation/:propertyid', (req, res) => {
+  Reservation.find({propertyid: req.params.propertyid}, (err, data) => {
+    err ? console.error(err) : res.status(200).send(data);
+  })
+});
 
 app.listen(port, () => console.log(`listening on port ${port}`));
