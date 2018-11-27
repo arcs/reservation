@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import $ from 'jquery';
 
 const MainContainer = styled.div`
-  height: 1080px;
-  width: 400px;
-  float: right;
-  padding: 25px;
   border: 1px solid #d3d8de;
-  font-family: Lato,Arial,Helvetica Neue,sans-serif;
+  float: right;
+  font-family: Lato, Arial, Helvetica Neue, sans-serif;
+  height: 1080px;
+  padding: 150px 160px 0px 20px;
+  width: 400px;
 `;
 
 const TopContainer = styled.section`
@@ -28,9 +28,9 @@ const RowContainer = styled.section`
 const Lightning = styled.div`
   background-image: url('./instant-book.png');
   filter: brightness(0%);
-  width: 27px;
   height: 27px;
   margin-top: 20px;
+  width: 27px;
 `;
 
 const Price = styled.h1`
@@ -49,40 +49,39 @@ const Average = styled.p`
 `;
 
 const Widget = styled.div`
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
   height: 40px;
-  box-sizing: border-box;
 `;
 
 const Share = styled.button`
   background-image: url('./share.png');
   background-repeat: no-repeat;
   background-position: center;
-  background-color: white;
-  width: 40px;
+  background-color: #fff;
+  border: none;
+  border-radius: 50%; 
+  box-shadow: 0 1px 2px rgba(0,0,0,.16);
+  cursor: pointer;
   height: 40px;
   margin-left: 100px;
   margin-right: 8px;
-  border: none;
   touch-action: manipulation;
-  cursor: pointer;
-  box-shadow: 0 1px 2px rgba(0,0,0,.16);
-  border-radius: 50%; 
+  width: 40px;
 `;
 
 const Favorite = styled.button`
   background-image: url('./favorite.png');
   background-repeat: no-repeat;
   background-position: center; 
-  background-color: white;
-  width: 40px;
-  height: 40px;
+  background-color: #fff;
   border: none;
-  touch-action: manipulation;
-  cursor: pointer;
-  box-shadow: 0 1px 2px rgba(0,0,0,.16);
   border-radius: 50%; 
+  box-shadow: 0 1px 2px rgba(0,0,0,.16);
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
 `;
 
 const Reviews = styled.p`
@@ -98,71 +97,93 @@ const Stars = styled.p`
 `;
 
 const DatesContainer = styled.div`
-  margin-bottom: 8px;
   background-color: #fff;
   border: 1px solid #d3d8de;
   border-radius: 4px;
+  margin-bottom: 8px;
 `;
 
 const CheckIn = styled.div`
-  background-color: #fff;
-  width: 170px;
+  background-color: #fff; 
+  background-image: url('./calendar.png');
+  background-position: 170px; 
+  background-repeat: no-repeat;
   border-right: 1px solid #d3d8de;
   border-bottom: 1px solid #d3d8de;
-  float: left;
-  background-image: url('./calendar.png');
-  background-repeat: no-repeat;
-  background-position: 170px; 
-  background-color: white; 
-  touch-action: manipulation;
+  color: #0067db;
   cursor: pointer;
+  float: left;
   padding: 16px;
+  touch-action: manipulation;
+  width: 170px;
 `;
 
 const CheckOut = styled.div`
   background-color: #fff;
-  width: auto;
-  border-bottom: 1px solid #d3d8de;
   background-image: url('./calendar.png');
-  background-repeat: no-repeat;
   background-position: 370px; 
-  background-color: white;
-  touch-action: manipulation;
+  background-repeat: no-repeat;
+  border-bottom: 1px solid #d3d8de;
+  color: #0067db;
   cursor: pointer;
   padding: 16px;
+  width: auto;
+`;
+
+const CheckOutPad = styled.span`
+  margin-left: 16px;
 `;
 
 const Guests = styled.div`
-  float: bottom;
+  background-color: #fff;
+  background-position: 370px; 
+  background-repeat: no-repeat;
+  border-bottom: 1px solid #d3d8de;
+  color: #0067db;
+  cursor: pointer;
+  padding: 16px;
+  width: auto;
 `;
 
 const Book = styled.button`
-  min-height: 48px;
-  border-radius: 100px;
   background-color: #0067db;
-  color: #fff;
-  text-align: center;
-  touch-action: manipulation;
-  cursor: pointer;
   border: 1px solid transparent;
-  padding: 11px 32px;
+  border-radius: 100px;
+  color: #fff;
+  cursor: pointer;
   font-size: 1rem;
-  display: block;
-  width: 365px;
+  min-height: 48px;
+  width: 240px;
+`;
+
+const BookingContainer = styled.div`
+  text-align: center;
+  padding: 16px;
 `;
 
 const Question = styled.a`
-  display: block;
-  color: #0067db;
-  text-align: center;
-  touch-action: manipulation;
-  cursor: pointer;
   border-radius: 100px;
-  padding: 20px
+  color: #0067db;
+  cursor: pointer;
+  display: block;
+  padding: 16px;
+  text-align: center;
 `;
 
 const Assistance = styled.p`
   text-align: center;
+`;
+
+const Feedback = styled.button`
+  background-color: #fff;
+  border-bottom-width: 0;
+  border-color: #d3d8de;
+  border-radius: 4px 4px 0 0;
+  color: #0067db;
+  margin-left: 400px;
+  margin-top: 620px;
+  min-height: 48px;
+  text-shadow: no
 `;
 
 export default class Reservation extends React.Component {
@@ -192,9 +213,9 @@ export default class Reservation extends React.Component {
     return (
       <div>
         {this.state.init &&
-          <div id="sidebar-container">
+          <div>
             <MainContainer>
-              <div id="inner-container">
+              <div>
                 <TopContainer>
                 <div>
                   <RowContainer>
@@ -209,20 +230,21 @@ export default class Reservation extends React.Component {
                     </div>
                   </RowContainer>
                 </div>
-                <div id="stars-box">
-                  <span id="stars"></span>
+                <div>
                   <Reviews>{this.state.data.reviewcount} Reviews</Reviews>
                   <Stars>{this.state.data.starrating}</Stars>
                 </div>
               </TopContainer>
                 <DatesContainer>
-                  <div id="availablities">
+                  <div>
                     <CheckIn>Check In</CheckIn>
-                    <CheckOut>Check Out</CheckOut>
+                    <CheckOut><CheckOutPad>Check Out</CheckOutPad></CheckOut>
                     <Guests>Guests</Guests>
                   </div>
                 </DatesContainer>
-                <Book>Book Now</Book>
+                <BookingContainer>
+                  <Book>Book Now</Book>
+                </BookingContainer>
                 <div>
                   <Question>Ask Owner a Question</Question>
                 </div>
@@ -230,7 +252,9 @@ export default class Reservation extends React.Component {
                   <span>For Booking assistance, call <b>888-829-7076</b><br/>
                   <b>Property #</b> {this.state.data.propertyid}</span>
                 </Assistance>
-                <div id="feedback">Feedback</div>
+                <div>
+                  <Feedback>Feedback</Feedback>
+                </div>
               </div>
             </MainContainer>
           </div>}
