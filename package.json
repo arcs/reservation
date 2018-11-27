@@ -20,6 +20,7 @@
     "nodemon": "^1.18.5",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
+    "react-stars": "^2.2.5",
     "styled-components": "^4.1.1"
   },
   "devDependencies": {
