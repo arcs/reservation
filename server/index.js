@@ -4,7 +4,7 @@ const path = require('path');
 const {Reservation} = require('../db/index.js');
 const cors = require('cors');
 const app = express();
-const port = 3001;
+const port = 8081;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -13,6 +13,7 @@ app.use(express.static(path.resolve(__dirname + '/../client/dist')));
 
 app.get('/reservation', (req, res) => {
   Reservation.find({}, (err, data) => {
+    console.log(data);
     err ? console.error(err) : res.status(200).send(data);
   })
 });
