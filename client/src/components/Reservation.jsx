@@ -200,11 +200,12 @@ export default class Reservation extends React.Component {
   componentDidMount() {
     let propertyId = Number(window.location.pathname.replace(/\//,''));
     if (propertyId > 0) {
-      $.get(`http://localhost:3001/reservation/${propertyId}`, result => {
+      $.get(`http://reservation.us-east-2.elasticbeanstalk.com/reservation/${propertyId}`, result => {
         this.setState({data: result[0], init: true});
       })
     } else {
-      $.get('http://localhost:3001/reservation', result => {
+      $.get('http://reservation.us-east-2.elasticbeanstalk.com/reservation', result => {
+        console.log(result);
         this.setState({data: result[0], init: true});
       }, 'json')
     }
