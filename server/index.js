@@ -2,9 +2,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const {Reservation} = require('../db/index.js');
+const cors = require('cors');
 const app = express();
 const port = 3001;
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.resolve(__dirname + '/../client/dist')));
