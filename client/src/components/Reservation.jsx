@@ -4,18 +4,15 @@ import ReactStars from 'react-stars'
 import $ from 'jquery';
 
 const MainContainer = styled.div`
+  background-color: #fff;
   border: 1px solid #d3d8de;
   float: right;
   font-family: Lato, Arial, Helvetica Neue, sans-serif;
-  height: 1080px;
-  padding: 0px 160px 0px 20px;
-  width: 400px;
-`;
-
-const SubContainer = styled.div`
-  border-right: 1px solid #d3d8de;
-  height: 1080px;
-  width: 430px;
+  height: 2320px;
+  padding-left: 20px;
+  position: relative;
+  top: -500px;
+  width: 14%;
 `;
 
 const TopContainer = styled.section`
@@ -34,7 +31,7 @@ const RowContainer = styled.section`
 `;
 
 const Lightning = styled.div`
-  background-image: url('./instant-book.png');
+  background-image: url('https://s3-us-west-2.amazonaws.com/fec1-reservation-icons/instant-book.png');
   filter: brightness(0%);
   height: 27px;
   margin-top: 20px;
@@ -64,7 +61,7 @@ const Widget = styled.div`
 `;
 
 const Share = styled.button`
-  background-image: url('./share.png');
+  background-image: url('https://s3-us-west-2.amazonaws.com/fec1-reservation-icons/share.png');
   background-repeat: no-repeat;
   background-position: center;
   background-color: #fff;
@@ -73,13 +70,13 @@ const Share = styled.button`
   box-shadow: 0 1px 2px rgba(0,0,0,.16);
   cursor: pointer;
   height: 40px;
-  margin: 0px 8px 0px 100px;
+  margin: 0px 8px 0px 45px;
   touch-action: manipulation;
   width: 40px;
 `;
 
 const Favorite = styled.button`
-  background-image: url('./favorite.png');
+  background-image: url('https://s3-us-west-2.amazonaws.com/fec1-reservation-icons/favorite.png');
   background-repeat: no-repeat;
   background-position: center; 
   background-color: #fff;
@@ -119,8 +116,8 @@ const DatesContainer = styled.div`
 
 const CheckIn = styled.div`
   background-color: #fff; 
-  background-image: url('./calendar.png');
-  background-position: 165px; 
+  background-image: url('https://s3-us-west-2.amazonaws.com/fec1-reservation-icons/calendar.png');
+  background-position: 90%; 
   background-repeat: no-repeat;
   border-right: 1px solid #d3d8de;
   border-bottom: 1px solid #d3d8de;
@@ -129,13 +126,13 @@ const CheckIn = styled.div`
   float: left;
   height: auto;
   padding: 16px;
-  width: 160px;
+  width: 42%;
 `;
 
 const CheckOut = styled.div`
   background-color: #fff;
-  background-image: url('./calendar.png');
-  background-position: 380px; 
+  background-image: url('https://s3-us-west-2.amazonaws.com/fec1-reservation-icons/calendar.png');
+  background-position: 95%; 
   background-repeat: no-repeat;
   border-bottom: 1px solid #d3d8de;
   color: #0067db;
@@ -169,11 +166,11 @@ const Book = styled.button`
   cursor: pointer;
   font-size: 1rem;
   min-height: 48px;
+  margin-left: 20%;
   width: 240px;
 `;
 
 const BookingContainer = styled.div`
-  text-align: center;
   padding: 16px;
 `;
 
@@ -188,16 +185,6 @@ const Question = styled.a`
 
 const Assistance = styled.p`
   text-align: center;
-`;
-
-const Feedback = styled.button`
-  background-color: #fff;
-  border-bottom-width: 0;
-  border-color: #d3d8de;
-  border-radius: 4px 4px 0 0;
-  color: #0067db;
-  margin: 475px 0px 0px 400px;
-  min-height: 48px;
 `;
 
 export default class Reservation extends React.Component {
@@ -229,7 +216,6 @@ export default class Reservation extends React.Component {
         {this.state.init &&
           <div>
             <MainContainer>
-              <SubContainer>
                 <div>
                   <TopContainer>
                   <div>
@@ -277,11 +263,7 @@ export default class Reservation extends React.Component {
                     <span>For Booking assistance, call <b>888-829-7076</b><br/>
                     <b>Property #</b> {this.state.data.propertyid}</span>
                   </Assistance>
-                  <div>
-                    <Feedback>Feedback</Feedback>
-                  </div>
                 </div>
-              </SubContainer>
             </MainContainer>
           </div>}
       </div>
