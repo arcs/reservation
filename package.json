@@ -8,8 +8,9 @@
     "node": ">=6.13.0"
   },
   "scripts": {
+    "build": "webpack --mode=production",
     "react-dev": "webpack -d --watch",
-    "server-dev": "nodemon --inspect server/index.js",
+    "start": "node server/index.js",
     "seed": "node db/seed.js",
     "test": "jest reservation/src/index.test.js"
   },
