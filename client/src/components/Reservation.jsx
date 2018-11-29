@@ -10,9 +10,7 @@ const MainContainer = styled.div`
   font-family: Lato, Arial, Helvetica Neue, sans-serif;
   height: 2320px;
   padding-left: 20px;
-  position: relative;
-  top: -500px;
-  width: 14%;
+  width: 400px;
 `;
 
 const TopContainer = styled.section`
@@ -70,7 +68,7 @@ const Share = styled.button`
   box-shadow: 0 1px 2px rgba(0,0,0,.16);
   cursor: pointer;
   height: 40px;
-  margin: 0px 8px 0px 45px;
+  margin: 0px 8px 0px 120px;
   touch-action: manipulation;
   width: 40px;
 `;
@@ -166,7 +164,7 @@ const Book = styled.button`
   cursor: pointer;
   font-size: 1rem;
   min-height: 48px;
-  margin-left: 20%;
+  margin-left: 16%;
   width: 240px;
 `;
 
